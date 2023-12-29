@@ -2,10 +2,10 @@
 
 /**
  * Plugin Name:       test
- * Description:       test plugin new description
- * Version:           1.0.1
+ * Description:       test plugin
+ * Version:           1.0.0
  * Author:            minimal
- * Update URI:        https://www.google.seo/pro
+ * GitHub Plugin URI: minimalhustler/test
  * Text Domain:       test
  */
 
@@ -14,10 +14,10 @@
 
 function check_for_plugin_update() {
     $current_version = '1.0.0'; // Replace with your current version
-    $repo_url = 'https://github.com/minimalhustler/test';
+    $repo_owner = 'minimalhustler';
+    $repo_name = 'test';
 
-    // Construct the GitHub API release URL
-    $api_url = "{$repo_url}/releases/latest";
+    $api_url = "https://api.github.com/repos/{$repo_owner}/{$repo_name}/releases/latest";
 
     // Make a remote request to your update-check endpoint
     $response = wp_remote_get($api_url);
@@ -26,23 +26,24 @@ function check_for_plugin_update() {
         $body = $response['body'];
         $data = json_decode($body);
 
+		echo $data->tag_name;
+		
         if ($data && version_compare($data->tag_name, $current_version, '>')) {
             // New version available, notify the user
-            add_action('admin_notices', 'display_update_notification');
+            add_action('admin_notices', function () use ($data) {
+                display_update_notification($data);
+            });
         }
     }
 }
 
-function display_update_notification() {
+function display_update_notification($data) {
     ?>
     <div class="notice notice-info is-dismissible">
-        <p>Test Plugin has a new version available! <a href="https://github.com/minimalhustler/test/releases/latest">Update now</a>.</p>
+        <p>Your Plugin has a new version available! <a href="<?php echo esc_url($data->zipball_url); ?>">Update now</a>.</p>
     </div>
     <?php
 }
 
 add_action('admin_init', 'check_for_plugin_update');
-
-
-
 
