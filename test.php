@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       test
  * Description:       test plugin
- * Version:           1.0.0
+ * Version:           1.0.2
  * Author:            minimal
  * GitHub Plugin URI: minimalhustler/test
  * Text Domain:       test
@@ -13,7 +13,7 @@
 // test.php
 
 function check_for_plugin_update() {
-    $current_version = '1.0.0'; // Replace with your current version
+    $current_version = '1.0.2'; // Replace with your current version
     $repo_owner = 'minimalhustler';
     $repo_name = 'test';
 
