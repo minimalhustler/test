@@ -2,8 +2,8 @@
 
 /**
  * Plugin Name:       test
- * Description:       test plugin
- * Version:           1.0.0
+ * Description:       test plugin new description
+ * Version:           1.0.1
  * Author:            minimal
  * Update URI:        https://www.google.seo/pro
  * Text Domain:       test
