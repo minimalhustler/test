@@ -25,8 +25,6 @@ function check_for_plugin_update() {
     if (is_array($response)) {
         $body = $response['body'];
         $data = json_decode($body);
-
-		echo $data->tag_name;
 		
         if ($data && version_compare($data->tag_name, $current_version, '>')) {
             // New version available, notify the user
